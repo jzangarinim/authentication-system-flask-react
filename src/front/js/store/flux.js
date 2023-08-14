@@ -23,7 +23,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             }),
           });
           if (response.ok) {
-            return true;
+            return response.status;
+          } else {
+            return false;
           }
         } catch (err) {
           console.log(err);

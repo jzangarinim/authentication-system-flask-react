@@ -23,18 +23,16 @@ export const Signup = () => {
       user.name,
       user.last_name
     );
-    if (response) {
+    if ((await response) === 201) {
       navigate("/login");
     }
   }
-
-  useEffect(() => {}, []);
 
   return (
     <>
       <div className="container">
         <div className="col 12 mt-3">
-          <div className="row mb-3">
+          <div className="row mb-3 needs-validation">
             <label htmlFor="nameInput" className="form-label">
               First Name
             </label>
@@ -44,7 +42,7 @@ export const Signup = () => {
               className="form-control"
               id="nameInput"
               placeholder="Your Name"
-              defaultValue={user.name}
+              defaultValue={null}
               name="name"
               onChange={handleChange}
             />
@@ -59,7 +57,7 @@ export const Signup = () => {
               className="form-control"
               id="last_nameInput"
               placeholder="Your Last Name"
-              defaultValue={user.last_name}
+              defaultValue={null}
               name="last_name"
               onChange={handleChange}
             />
@@ -74,7 +72,6 @@ export const Signup = () => {
               className="form-control"
               id="emailInput"
               placeholder="name@example.com"
-              defaultValue={user.email}
               name="email"
               onChange={handleChange}
             />
@@ -89,7 +86,6 @@ export const Signup = () => {
               id="passwordInput"
               className="form-control"
               aria-labelledby="passwordHelpBlock"
-              defaultValue={user.password}
               name="password"
               onChange={handleChange}
             />

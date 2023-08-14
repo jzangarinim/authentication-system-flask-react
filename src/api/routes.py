@@ -18,19 +18,19 @@ def check_password(hash_password, password):
 @api.route('/users', methods=['POST'])
 def handle_register():
     data = request.json
-
-    if data.get("email") is None:
+    print(data)
+    if data["email"] is None or not data["email"]:
         return jsonify({"message": "Wrong property"}), 400
-    if data.get("password") is None:
+    if data["password"] is None or not data["password"] or len(data["password"]) < 8:
         return jsonify({"message": "Wrong property"}), 400
-    if data.get("name") is None:
+    if data["name"] is None or not data["name"]:
         return jsonify({"message": "Wrong property"}), 400
-    if data.get("last_name") is None:
+    if data["last_name"] is None or not data["last_name"]:
         return jsonify({"message": "Wrong property"}), 400
 
     user = User.query.filter_by(email=data.get("email")).first()
     if user is not None:
-        return jsonify({"message": "The user already exists"})
+        return jsonify({"message": "The user already exists"}), 400
 
     if user is None:
         password = set_password(data.get("password"))
